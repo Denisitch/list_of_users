@@ -1,0 +1,45 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Blog entries-->
+        <div class="col-lg-8">
+            <!-- Featured blog post-->
+            {% for item in users %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    {% if item.photo %}
+                    <img src="{{ item.photo.url }}" alt="" width="100" class="float-left mr-3">
+                    {% else %}
+                    <img src="https://donttakefake.com/wp-content/uploads/2020/11/smile-dtf-magazine.png"
+                         alt="" width="100" class="float-left mr-3">
+                    {% endif %}
+                    <h2 class="card-title"><a href="{{ item.get_absolute_url }}">{{ item.first_name }}</a></h2>
+                    <h4 class="card-title">{{ item.last_name }} {{ item.patronymic }}</h4>
+                    <div class="small text-muted">{{ item.date_of_birth|date:"Y-m-d" }}</div>
+                    <div class="small text-muted">{{ item.phone_number }}</div>
+                    <p class="card-text">{{ item.status}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Side widgets-->
+        <div class="col-lg-4">
+            <!-- Search widget-->
+            <div class="card mb-4">
+                <div class="card-header">Поиск</div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <form method="get">
+                            <input name="q" class="form-control" type="text" placeholder="Enter search term..."
+                                   aria-label="Enter search term..." aria-describedby="button-search"/>
+                            <button class="btn btn-primary" id="button-search" type="submit">Искать</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
